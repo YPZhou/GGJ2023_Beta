@@ -60,20 +60,27 @@ namespace GGJ2023.Beta
 				case 1:     // 左右2路激光
 					GenerateRandomLaser(leftLanePosition);
 					GenerateRandomLaser(rightLanePosition);
+					GenerateRandomTrapOrBlock(midLanePosition);
 					break;
 				case 2:     // 左中2路激光
 					GenerateRandomLaser(leftLanePosition);
 					GenerateRandomLaser(midLanePosition);
+					GenerateRandomTrapOrBlock(rightLanePosition);
 					break;
 				case 3:     // 右中2路激光
 					GenerateRandomLaser(midLanePosition);
 					GenerateRandomLaser(rightLanePosition);
+					GenerateRandomTrapOrBlock(leftLanePosition);
 					break;
 				case 4:     // 左路激光
 					GenerateRandomLaser(leftLanePosition);
+					GenerateRandomTrapOrBlock(midLanePosition);
+					GenerateRandomTrapOrBlock(rightLanePosition);
 					break;
 				case 5:     // 右路激光
 					GenerateRandomLaser(rightLanePosition);
+					GenerateRandomTrapOrBlock(midLanePosition);
+					GenerateRandomTrapOrBlock(leftLanePosition);
 					break;
 			}
 		}
@@ -82,6 +89,23 @@ namespace GGJ2023.Beta
 		{
 			var laserRandomPick = Random.Range(0, 2);
 			Instantiate(laserPrefabList[laserRandomPick], position, Quaternion.identity);
+		}
+
+		void GenerateRandomTrapOrBlock(Vector3 position)
+		{
+			var shouldGenerate = Random.value >= 0.2f + GameStatus.ScoreFactor * 0.05f;
+			if (shouldGenerate)
+			{
+				var randomPick = Random.Range(0, 2);
+				if (randomPick == 0)
+				{
+					Instantiate(trapPrefab, position, Quaternion.identity);
+				}
+				else if (randomPick == 1)
+				{
+					Instantiate(blockPrefab, position, Quaternion.identity);
+				}
+			}
 		}
 
 		[SerializeField]
