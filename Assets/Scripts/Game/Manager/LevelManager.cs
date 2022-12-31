@@ -21,7 +21,7 @@ namespace GGJ2023.Beta
 					GameStatus.PropUpdateTime = gameRunningTime;
 				}
 
-				if (gameRunningTime - GameStatus.ObstacleUpdateTime > 1f)
+				if (gameRunningTime - GameStatus.ObstacleUpdateTime > 3f)
 				{
 					GenerateRandomObstacle();
 
