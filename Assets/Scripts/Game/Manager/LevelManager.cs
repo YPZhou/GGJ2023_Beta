@@ -1,28 +1,59 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GGJ2023.Beta
 {
 	public class LevelManager : MonoBehaviour
 	{
+		void Start()
+		{
+			propGenerationInterval = Random.Range(minPropGenerationInterval, maxPropGenerationInterval);
+		}
 
 		void Update()
 		{
-			for (var i = 0; i < GameStatus.MAX_HEALTH; i++)
+			if (GameStatus.IsGameRunning)
 			{
-				var healthImage = healthImageList[i];
-				if (GameStatus.Health > i)
+				var gameRunningTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);
+				if (gameRunningTime - GameStatus.PropUpdateTime > propGenerationInterval)
 				{
-					healthImage.color = Color.red;
+					GenerateRandomProp();
+
+					GameStatus.PropUpdateTime = gameRunningTime;
 				}
-				else
+
+				if (gameRunningTime - GameStatus.ObstacleUpdateTime > 1f)
 				{
-					healthImage.color = Color.gray;
+					GenerateRandomObstacle();
+
+					GameStatus.ObstacleUpdateTime = gameRunningTime;
 				}
 			}
 		}
 
+		void GenerateRandomProp()
+		{
+			var laneRandomPick = Random.Range(0, 3);
+			var propPosition = new Vector3((laneRandomPick - 1) * 2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
+
+			var propRandomPick = Random.Range(0, 2);
+			Instantiate(propPrefabList[propRandomPick], propPosition, Quaternion.identity);
+
+			propGenerationInterval = Random.Range(minPropGenerationInterval, maxPropGenerationInterval);
+		}
+
+		float propGenerationInterval;
+
+		void GenerateRandomObstacle()
+		{
+		}
+
 		[SerializeField]
-		Image[] healthImageList;
+		float minPropGenerationInterval = 3f;
+
+		[SerializeField]
+		float maxPropGenerationInterval = 7f;
+
+		[SerializeField]
+		GameObject[] propPrefabList;
 	}
 }

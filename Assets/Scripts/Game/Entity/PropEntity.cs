@@ -17,6 +17,25 @@ namespace GGJ2023.Beta
 			{
 				sprite.color = Color.blue;
 			}
+
+			generationTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);
+		}
+
+		float generationTime;
+
+		void Update()
+		{
+			if (GameStatus.IsGameRunning)
+			{
+				var gameRunningTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);
+				var verticalTranslation = (gameRunningTime - generationTime) * GameStatus.VERTICAL_MOVE_SPEED;
+				transform.position = new Vector3(transform.position.x, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION - verticalTranslation);
+
+				if (transform.position.y < -6f)
+				{
+					Destroy(gameObject);
+				}
+			}
 		}
 
 		[SerializeField]

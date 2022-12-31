@@ -58,7 +58,6 @@ namespace GGJ2023.Beta
             }
         }
 
-        
         void OnCollisionProp(PropEntity propEntity)
         {
 
@@ -100,6 +99,7 @@ namespace GGJ2023.Beta
                 }
             }
 
+            Destroy(propEntity.gameObject);
         }
 
         void OnCollisionObstacle(ObstacleEntity obstacleEntity)

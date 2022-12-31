@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 436598893}
   - component: {fileID: 436598894}
   - component: {fileID: 436598895}
+  - component: {fileID: 436598896}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -584,6 +585,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1399857420}
   scoreFactorText: {fileID: 694689658}
+--- !u!114 &436598896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436598891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5340377427176ca489e49fe5222a9c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPropGenerationInterval: 3
+  maxPropGenerationInterval: 7
+  propPrefabList:
+  - {fileID: 8068357654581167656, guid: 0bcf6b2b35f8dec4f89a55ec7c513782, type: 3}
+  - {fileID: 8068357654581167656, guid: a82261654bde29b4db9f210be24452ba, type: 3}
 --- !u!1 &492554493
 GameObject:
   m_ObjectHideFlags: 0

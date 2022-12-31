@@ -25,6 +25,8 @@ namespace GGJ2023.Beta
 
 		public static float PropUpdateTime { get; set; }
 
+		public static float ObstacleUpdateTime { get; set; }
+
 		public static int Score { get; set; }
 
 		public static float ScoreFactor { get; set; }
@@ -75,5 +77,9 @@ namespace GGJ2023.Beta
 		public const float SCORE_GAIN_INTERVAL = 1f;
 
 		public const int MAX_HEALTH = 3;
+
+		public const float VERTICAL_MOVE_SPEED = 1f;
+
+		public const float OBJECT_INITIAL_VERTICAL_POSITION = 5f;
 	}
 }
