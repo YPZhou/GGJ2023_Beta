@@ -47,25 +47,41 @@ namespace GGJ2023.Beta
 		{
 			var laserObstacleRandomPick = Random.Range(0, 6);
 			var leftLanePosition = new Vector3(-2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
-			var midLanePosition = new Vector3(-2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
-			var rightLanePosition = new Vector3(-2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
+			var midLanePosition = new Vector3(0f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
+			var rightLanePosition = new Vector3(2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
 
 			switch (laserObstacleRandomPick)
 			{
-				case 0:		// 3路激光
-
+				case 0:     // 3路激光
+					GenerateRandomLaser(leftLanePosition);
+					GenerateRandomLaser(midLanePosition);
+					GenerateRandomLaser(rightLanePosition);
 					break;
-				case 1:		// 左右2路激光
+				case 1:     // 左右2路激光
+					GenerateRandomLaser(leftLanePosition);
+					GenerateRandomLaser(rightLanePosition);
 					break;
-				case 2:		// 左中2路激光
+				case 2:     // 左中2路激光
+					GenerateRandomLaser(leftLanePosition);
+					GenerateRandomLaser(midLanePosition);
 					break;
-				case 3:		// 右中2路激光
+				case 3:     // 右中2路激光
+					GenerateRandomLaser(midLanePosition);
+					GenerateRandomLaser(rightLanePosition);
 					break;
-				case 4:		// 左路激光
+				case 4:     // 左路激光
+					GenerateRandomLaser(leftLanePosition);
 					break;
-				case 5:		// 右路激光
+				case 5:     // 右路激光
+					GenerateRandomLaser(rightLanePosition);
 					break;
 			}
+		}
+
+		void GenerateRandomLaser(Vector3 position)
+		{
+			var laserRandomPick = Random.Range(0, 2);
+			Instantiate(laserPrefabList[laserRandomPick], position, Quaternion.identity);
 		}
 
 		[SerializeField]
