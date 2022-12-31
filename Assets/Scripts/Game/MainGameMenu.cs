@@ -22,6 +22,8 @@ namespace GGJ2023.Beta
 				if (Input.GetKeyUp(KeyCode.Escape))
 				{
 					GameStatus.IsGameRunning = false;
+					GameStatus.GamePauseTime = Time.realtimeSinceStartup;
+					GameStatus.GamePausedTime = 0f;
 
 					currentGameMenu = 0;
 				}
@@ -96,6 +98,9 @@ namespace GGJ2023.Beta
 						case 1: // start new game
 							GameStatus.IsGameStarted = true;
 							GameStatus.IsGameRunning = true;
+							GameStatus.GameStartTime = Time.realtimeSinceStartup;
+							GameStatus.GamePauseTime = -1f;
+							GameStatus.GamePausedTime = 0f;
 							break;
 						case 2: // quit game
 #if UNITY_EDITOR
