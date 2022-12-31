@@ -11,6 +11,8 @@ namespace GGJ2023.Beta
 			GameStatus.IsGameRunning = false;
 
 			currentGameMenu = 1;
+
+			SoundManager.PlayAudio("bgm01");
 		}
 
 		void Update()
