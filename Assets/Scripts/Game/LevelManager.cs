@@ -1,20 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GGJ2023.Beta
 {
 	public class LevelManager : MonoBehaviour
 	{
-		void Start()
-		{
-		
-		}
 
 		void Update()
 		{
-			if (GameStatus.IsGameRunning)
+			for (var i = 0; i < GameStatus.MAX_HEALTH; i++)
 			{
-				var gameRunningTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);
+				var healthImage = healthImageList[i];
+				if (GameStatus.Health > i)
+				{
+					healthImage.color = Color.red;
+				}
+				else
+				{
+					healthImage.color = Color.gray;
+				}
 			}
 		}
+
+		[SerializeField]
+		Image[] healthImageList;
 	}
 }

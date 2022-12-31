@@ -566,6 +566,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1d345984fe677488b5463f9c859faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthImageList:
+  - {fileID: 1676028000}
+  - {fileID: 189623768}
+  - {fileID: 198013490}
 --- !u!114 &436598895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686e981fb73fe3045bbb3ecf9c6191ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 1399857420}
+  scoreFactorText: {fileID: 694689658}
 --- !u!1 &492554493
 GameObject:
   m_ObjectHideFlags: 0

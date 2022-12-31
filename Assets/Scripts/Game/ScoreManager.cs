@@ -1,22 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GGJ2023.Beta
 {
 	public class ScoreManager : MonoBehaviour
 	{
-		// Start is called before the first frame update
-		void Start()
-		{
-		
-		}
-
-		// Update is called once per frame
 		void Update()
 		{
 			if (GameStatus.IsGameRunning)
 			{
 				var gameRunningTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);
+				if (gameRunningTime - GameStatus.ScoreUpdateTime > GameStatus.SCORE_GAIN_INTERVAL)
+				{
+					GameStatus.Score += Mathf.FloorToInt(GameStatus.BASE_SCORE_GAIN * GameStatus.ScoreFactor);
+					GameStatus.ScoreFactor += GameStatus.BASE_SCORE_FACTOR_GAIN;
+
+					GameStatus.ScoreUpdateTime = gameRunningTime;
+				}
+
+				scoreText.text = GameStatus.Score.ToString();
+				scoreFactorText.text = GameStatus.ScoreFactor.ToString("f1");
 			}
 		}
+
+		[SerializeField]
+		Text scoreText;
+
+		[SerializeField]
+		Text scoreFactorText;
 	}
 }
