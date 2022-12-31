@@ -80,7 +80,7 @@ namespace GGJ2023.Beta
 
 		public const int MAX_HEALTH = 3;
 
-		public const float VERTICAL_MOVE_SPEED = 1f;
+		public const float VERTICAL_MOVE_SPEED = 3f;
 
 		public const float OBJECT_INITIAL_VERTICAL_POSITION = 5f;
 		
