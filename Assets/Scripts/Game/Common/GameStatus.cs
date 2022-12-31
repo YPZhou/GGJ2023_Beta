@@ -43,6 +43,8 @@ namespace GGJ2023.Beta
 			GamePausedTime = 0f;
 
 			ScoreUpdateTime = 0f;
+			PropUpdateTime = 0f;
+			ObstacleUpdateTime = 0f;
 
 			Score = 0;
 			ScoreFactor = BASE_SCORE_FACTOR;
