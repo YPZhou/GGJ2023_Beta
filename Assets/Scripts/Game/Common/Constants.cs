@@ -1,3 +1,5 @@
+using System;
+
 namespace GGJ2023.Beta
 {
     /// <summary>
@@ -17,6 +19,25 @@ namespace GGJ2023.Beta
     {
         Red,
         Blue
+
     }
+    
+    
+    public static class ConstantExtension
+    {
+        public static ColorType Reverse(this ColorType colorType)
+        {
+            return colorType switch
+            {
+                ColorType.Red => ColorType.Blue,
+                ColorType.Blue => ColorType.Red,
+                _ => throw new ArgumentOutOfRangeException(nameof(colorType), colorType, null)
+            };
+        }
+
+    }
+
+
+
 
 }

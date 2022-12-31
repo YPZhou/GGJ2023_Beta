@@ -52,8 +52,22 @@ namespace GGJ2023.Beta
             }
             
             transform.Translate(translation);
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (TryGetComponent<HugeBuff>(out _) || TryGetComponent<SmallBuff>(out _))
+                {
+                    return;
+                }
+                
+                ChangeColor(colorType.Reverse());
+
+            }
         }
 
+        
+        
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -108,8 +122,9 @@ namespace GGJ2023.Beta
                     AddBuff<SmallBuff>();
                 }
             }
-
+            
             Destroy(propEntity.gameObject);
+
         }
 
         void OnTriggerObstacle(ObstacleEntity obstacleEntity)
