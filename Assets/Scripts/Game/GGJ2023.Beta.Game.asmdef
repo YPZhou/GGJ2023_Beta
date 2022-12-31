@@ -1,0 +1,14 @@
+{
+    "name": "GGJ2023.Beta.Game",
+    "rootNamespace": "GGJ2023.Beta",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
