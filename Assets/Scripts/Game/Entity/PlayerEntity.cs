@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GGJ2023.Beta
@@ -11,7 +12,6 @@ namespace GGJ2023.Beta
 
         public CircleCollider2D Collider2D { get; private set; }
         
-        
         public SpriteRenderer SpriteRenderer { get; private set; }
         
         private void Awake()
@@ -19,59 +19,69 @@ namespace GGJ2023.Beta
             Instance = this;
             Collider2D = GetComponent<CircleCollider2D>();
             SpriteRenderer = GetComponent<SpriteRenderer>();
-            
-            SpriteRenderer.color = colorType switch
-            {
-                ColorType.Red => Color.red,
-                ColorType.Blue => Color.blue,
-                _ => SpriteRenderer.color
-            };
+            ChangeColor(colorType);
         }
         
 
         [Tooltip("横轴移动速度")]
         [SerializeField]
-        private float moveSpeed = 5f;
+        public float moveSpeed = 5f;
         
         [SerializeField]
         private ColorType colorType;
+
         
+        private Vector2 translation;
         
-            
         private void Update()
         {
             var axis = Input.GetAxisRaw("Horizontal");
-            var translation = new Vector2(axis * moveSpeed * Time.deltaTime, 0);
+            translation = new Vector2(axis * moveSpeed * Time.deltaTime, 0);
+            var contactFilter2D = new ContactFilter2D()
+            {
+                useLayerMask = true,
+                layerMask = LayerMask.GetMask("Border")
+            };
+            var result = new RaycastHit2D[1];
+            var origin = Collider2D.bounds.center;
+            var distance = translation.magnitude + Collider2D.bounds.extents.x;
+            Physics2D.Raycast(origin, translation.normalized, contactFilter2D, result, distance);
+            if (result[0].collider != null)
+            {
+                translation = Vector2.zero;
+            }
+            
             transform.Translate(translation);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent<PropEntity>(out var propEntity))
             {
-                OnCollisionProp(propEntity);
+                OnTriggerProp(propEntity);
             }
-
+            
             if (other.gameObject.TryGetComponent<ObstacleEntity>(out var obstacleEntity))
             {
-                OnCollisionObstacle(obstacleEntity);
+                OnTriggerObstacle(obstacleEntity);
             }
         }
 
-        void OnCollisionProp(PropEntity propEntity)
+        
+        void OnTriggerProp(PropEntity propEntity)
         {
 
             if (TryGetComponent<HugeBuff>(out var hugeBuff))
             {
-                // 接触到同色道具时球体会变大，但速度会变慢
                 if (colorType == propEntity.colorType)
                 {
-                    hugeBuff.Delay(5f);
+                    hugeBuff.Delay(GameStatus.BASE_BUFF_DELAY);
                 }
                 else
                 {
                     // 拾取到异色道具时变为对应的颜色
-                    colorType = propEntity.colorType;
+                    ChangeColor(propEntity.colorType);
                 }
 
             }
@@ -79,44 +89,115 @@ namespace GGJ2023.Beta
             {
                 if (colorType == propEntity.colorType)
                 {
-                    smallBuff.Delay(5f);
+                    smallBuff.Delay(GameStatus.BASE_BUFF_DELAY);
                 }
                 else
                 {
                     // 拾取到异色道具时变为对应的颜色
-                    colorType = propEntity.colorType;
+                    ChangeColor(propEntity.colorType);
                 }
             }
             else
             {
                 if (colorType == propEntity.colorType)
                 {
-                    AddBuff<HugeBuff>(5f);
+                    AddBuff<HugeBuff>();
                 }
                 else
                 {
-                    AddBuff<SmallBuff>(5f);
+                    AddBuff<SmallBuff>();
                 }
             }
 
-            Destroy(propEntity.gameObject);
         }
 
-        void OnCollisionObstacle(ObstacleEntity obstacleEntity)
+        void OnTriggerObstacle(ObstacleEntity obstacleEntity)
         {
-            
+            switch (obstacleEntity.obstacleType)
+            {
+                // 激光。
+                case ObstacleType.Laser:
+                {
+                    if (TryGetComponent<SmallBuff>(out _) || TryGetComponent<HugeBuff>(out _))
+                    {
+                        return;
+                    }
+                    
+                    if (colorType != obstacleEntity.colorType)
+                    {
+                        Hurt();
+                    }
+
+                    break;
+                }
+                // 障碍。
+                case ObstacleType.Block:
+                {
+                    if (TryGetComponent<HugeBuff>(out _))
+                    {
+                        return;
+                    }
+                    
+                    Hurt();
+                    break;
+                }
+                
+                // 陷阱。
+                case ObstacleType.Trap:
+                {
+                    if (TryGetComponent<SmallBuff>(out _))
+                    {
+                        return;
+                    }
+                    
+                    Hurt();
+                    
+                    break;
+                }
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        void AddBuff<T>(float duration) where T : BuffBase
+
+        void ChangeColor(ColorType color)
+        {
+            if (colorType != color)
+            {
+                colorType = color;
+                SpriteRenderer.color = color switch
+                {
+                    ColorType.Red => Color.red,
+                    ColorType.Blue => Color.blue,
+                    _ => SpriteRenderer.color
+                };
+            }
+        }
+
+        void AddBuff<T>() where T : BuffBase
         {
             var buff = gameObject.GetComponent<T>();
             if (buff == null)
             {
                 buff = gameObject.AddComponent<T>();
-                buff.TakeEffect(duration);
+                buff.TakeEffect(GameStatus.BASE_BUFF_DURATION);
             }
         }
-        
+
+
+        void Hurt()
+        {
+            // 颜色不同时扣血，重置得分倍率。
+            GameStatus.Health -= GameStatus.HURT_HEALTH;
+            GameStatus.ScoreFactor = GameStatus.BASE_SCORE_FACTOR;
+            
+            // 血量归零游戏结束。
+            if (GameStatus.Health <= 0)
+            {
+                GameStatus.GameOver();
+            }
+        }
 
     }
 }

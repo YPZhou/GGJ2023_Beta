@@ -81,5 +81,11 @@ namespace GGJ2023.Beta
 		public const float VERTICAL_MOVE_SPEED = 1f;
 
 		public const float OBJECT_INITIAL_VERTICAL_POSITION = 5f;
+		
+		public const int HURT_HEALTH = 1;
+
+		public const float BASE_BUFF_DURATION = 5f;
+		
+		public const float BASE_BUFF_DELAY = 5f;
 	}
 }
