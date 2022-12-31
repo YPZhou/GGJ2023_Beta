@@ -7,6 +7,7 @@ namespace GGJ2023.Beta
     /// </summary>
     public class PropEntity : MonoBehaviour
     {
-        
+        [SerializeField]
+        public ColorType colorType;
     }
 }
