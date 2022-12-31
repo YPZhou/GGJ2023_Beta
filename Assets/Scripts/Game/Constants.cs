@@ -18,4 +18,5 @@ namespace GGJ2023.Beta
         Red,
         Blue
     }
+
 }
