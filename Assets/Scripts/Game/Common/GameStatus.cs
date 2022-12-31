@@ -23,6 +23,8 @@ namespace GGJ2023.Beta
 
 		public static float ScoreUpdateTime { get; set; }
 
+		public static float PropUpdateTime { get; set; }
+
 		public static int Score { get; set; }
 
 		public static float ScoreFactor { get; set; }
@@ -56,6 +58,12 @@ namespace GGJ2023.Beta
 		public static void ResumeGame()
 		{
 			IsGameRunning = true;
+		}
+
+		public static void GameOver()
+		{
+			IsGameStarted = false;
+			IsGameRunning = false;
 		}
 
 		public const int BASE_SCORE_GAIN = 100;
