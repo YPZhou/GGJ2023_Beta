@@ -395,10 +395,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713b3617958eeee4cbc74340303954e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainGameMenu: {fileID: 1217697343}
-  resumeGameText: {fileID: 1621434145}
-  startNewGameText: {fileID: 233627633}
-  endGameText: {fileID: 80470444}
+  mainGameMenu: {fileID: 1217697345}
+  gameMenuTextList:
+  - {fileID: 1621434145}
+  - {fileID: 233627633}
+  - {fileID: 80470444}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
