@@ -57,5 +57,10 @@ namespace GGJ2023.Beta
 
 		[SerializeField]
 		SpriteRenderer sprite;
+
+		public void Death()
+		{
+			Destroy(gameObject);
+		}
 	}
 }

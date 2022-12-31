@@ -43,5 +43,10 @@ namespace GGJ2023.Beta
 
 		[SerializeField]
 		public ColorType colorType;
+		
+		public void Death()
+		{
+			Destroy(gameObject);
+		}
 	}
 }
