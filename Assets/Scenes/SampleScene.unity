@@ -602,6 +602,11 @@ MonoBehaviour:
   propPrefabList:
   - {fileID: 8068357654581167656, guid: 0bcf6b2b35f8dec4f89a55ec7c513782, type: 3}
   - {fileID: 8068357654581167656, guid: a82261654bde29b4db9f210be24452ba, type: 3}
+  laserPrefabList:
+  - {fileID: 8209191216475488165, guid: 735cc5384c606844b83064180ce0daa3, type: 3}
+  - {fileID: 8209191216475488165, guid: 5110e3eb511e2e24eb475a1fb85dd9aa, type: 3}
+  blockPrefab: {fileID: 8209191216475488165, guid: 708c81baaac9fa64c8385d24ef76391a, type: 3}
+  trapPrefab: {fileID: 8209191216475488165, guid: 54a2dea65e8379b4cacba4c121f71679, type: 3}
 --- !u!1 &492554493
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,9 +46,14 @@ namespace GGJ2023.Beta
 		void GenerateRandomObstacle()
 		{
 			var laserObstacleRandomPick = Random.Range(0, 6);
+			var leftLanePosition = new Vector3(-2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
+			var midLanePosition = new Vector3(-2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
+			var rightLanePosition = new Vector3(-2f, GameStatus.OBJECT_INITIAL_VERTICAL_POSITION, 0f);
+
 			switch (laserObstacleRandomPick)
 			{
 				case 0:		// 3路激光
+
 					break;
 				case 1:		// 左右2路激光
 					break;
@@ -71,5 +76,14 @@ namespace GGJ2023.Beta
 
 		[SerializeField]
 		GameObject[] propPrefabList;
+
+		[SerializeField]
+		GameObject[] laserPrefabList;
+
+		[SerializeField]
+		GameObject blockPrefab;
+
+		[SerializeField]
+		GameObject trapPrefab;
 	}
 }

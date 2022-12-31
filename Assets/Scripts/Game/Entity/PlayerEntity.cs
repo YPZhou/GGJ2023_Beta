@@ -109,6 +109,7 @@ namespace GGJ2023.Beta
                 }
             }
 
+            Destroy(propEntity.gameObject);
         }
 
         void OnTriggerObstacle(ObstacleEntity obstacleEntity)
