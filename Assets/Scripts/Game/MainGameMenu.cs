@@ -5,13 +5,14 @@ namespace GGJ2023.Beta
 {
 	public class MainGameMenu : MonoBehaviour
 	{
-		// Start is called before the first frame update
 		void Start()
 		{
-			GameStatus.IsGameRunning = true;
+			GameStatus.IsGameStarted = false;
+			GameStatus.IsGameRunning = false;
+
+			currentGameMenu = 1;
 		}
 
-		// Update is called once per frame
 		void Update()
 		{
 			if (GameStatus.IsGameRunning)
@@ -21,6 +22,8 @@ namespace GGJ2023.Beta
 				if (Input.GetKeyUp(KeyCode.Escape))
 				{
 					GameStatus.IsGameRunning = false;
+
+					currentGameMenu = 0;
 				}
 			}
 			else
@@ -30,22 +33,47 @@ namespace GGJ2023.Beta
 				for (var i = 0; i < gameMenuTextList.Length; i++)
 				{
 					var gameMenuText = gameMenuTextList[i];
+
 					if (currentGameMenu == i)
 					{
 						gameMenuText.color = Color.red;
 					}
 					else
 					{
-						gameMenuText.color = Color.white;
+						if (i == 0)
+						{
+							if (GameStatus.IsGameStarted)
+							{
+								gameMenuText.color = Color.white;
+							}
+							else
+							{
+								gameMenuText.color = Color.gray;
+							}
+						}
+						else
+						{
+							gameMenuText.color = Color.white;
+						}
 					}
 				}
 
 				if (Input.GetKeyUp(KeyCode.UpArrow))
 				{
 					currentGameMenu -= 1;
-					if (currentGameMenu < 0)
+					if (GameStatus.IsGameStarted)
 					{
-						currentGameMenu = 0;
+						if (currentGameMenu < 0)
+						{
+							currentGameMenu = 0;
+						}
+					}
+					else
+					{
+						if (currentGameMenu < 1)
+						{
+							currentGameMenu = 1;
+						}
 					}
 				}
 
@@ -66,6 +94,7 @@ namespace GGJ2023.Beta
 							GameStatus.IsGameRunning = true;
 							break;
 						case 1: // start new game
+							GameStatus.IsGameStarted = true;
 							GameStatus.IsGameRunning = true;
 							break;
 						case 2: // quit game
