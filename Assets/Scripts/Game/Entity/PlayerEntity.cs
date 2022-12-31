@@ -35,6 +35,11 @@ namespace GGJ2023.Beta
         
         private void Update()
         {
+            if (!GameStatus.IsGameRunning)
+            {
+                return;
+            }
+            
             var axis = Input.GetAxisRaw("Horizontal");
             translation = new Vector2(axis * moveSpeed * Time.deltaTime, 0);
             var contactFilter2D = new ContactFilter2D()
@@ -56,7 +61,7 @@ namespace GGJ2023.Beta
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (TryGetComponent<HugeBuff>(out _) || TryGetComponent<SmallBuff>(out _))
+                if (IsHuge || IsSmall)
                 {
                     return;
                 }
@@ -122,8 +127,8 @@ namespace GGJ2023.Beta
                     AddBuff<SmallBuff>();
                 }
             }
-            
-            Destroy(propEntity.gameObject);
+
+            propEntity.Death();
 
         }
 
@@ -134,14 +139,21 @@ namespace GGJ2023.Beta
                 // 激光。
                 case ObstacleType.Laser:
                 {
-                    if (TryGetComponent<SmallBuff>(out _) || TryGetComponent<HugeBuff>(out _))
+                    if (IsSmall)
                     {
                         return;
                     }
-                    
+
+                    if (IsHuge)
+                    {
+                        obstacleEntity.Death();
+                        return;
+                    }
+
                     if (colorType != obstacleEntity.colorType)
                     {
                         Hurt();
+                        obstacleEntity.Death();
                     }
 
                     break;
@@ -149,7 +161,8 @@ namespace GGJ2023.Beta
                 // 障碍。
                 case ObstacleType.Block:
                 {
-                    if (TryGetComponent<HugeBuff>(out _))
+                    obstacleEntity.Death();
+                    if (IsHuge)
                     {
                         return;
                     }
@@ -161,13 +174,12 @@ namespace GGJ2023.Beta
                 // 陷阱。
                 case ObstacleType.Trap:
                 {
-                    if (TryGetComponent<SmallBuff>(out _))
+                    if (IsSmall)
                     {
                         return;
                     }
                     
                     Hurt();
-                    
                     break;
                 }
 
@@ -204,6 +216,7 @@ namespace GGJ2023.Beta
 
         void Hurt()
         {
+            Debug.Log("Hurt");
             // 颜色不同时扣血，重置得分倍率。
             GameStatus.Health -= GameStatus.HURT_HEALTH;
             GameStatus.ScoreFactor = GameStatus.BASE_SCORE_FACTOR;
@@ -215,5 +228,27 @@ namespace GGJ2023.Beta
             }
         }
 
+        public bool IsHuge => TryGetComponent<HugeBuff>(out _);
+        
+        public bool IsSmall => TryGetComponent<SmallBuff>(out _);
+
+
+        public float BuffDuration 
+        {
+            get
+            {
+                if (TryGetComponent<HugeBuff>(out var hugeBuff))
+                {
+                    return hugeBuff.EffectiveTime;
+                }
+                else if (TryGetComponent<SmallBuff>(out var smallBuff))
+                {
+                    return smallBuff.EffectiveTime;
+                }
+
+                return 0f;
+            }
+        }
+        
     }
 }
