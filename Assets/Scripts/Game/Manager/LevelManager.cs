@@ -45,6 +45,22 @@ namespace GGJ2023.Beta
 
 		void GenerateRandomObstacle()
 		{
+			var laserObstacleRandomPick = Random.Range(0, 6);
+			switch (laserObstacleRandomPick)
+			{
+				case 0:		// 3路激光
+					break;
+				case 1:		// 左右2路激光
+					break;
+				case 2:		// 左中2路激光
+					break;
+				case 3:		// 右中2路激光
+					break;
+				case 4:		// 左路激光
+					break;
+				case 5:		// 右路激光
+					break;
+			}
 		}
 
 		[SerializeField]
