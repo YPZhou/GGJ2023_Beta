@@ -50,6 +50,8 @@ namespace GGJ2023.Beta
 			ScoreFactor = BASE_SCORE_FACTOR;
 
 			Health = MAX_HEALTH;
+
+			SoundManager.PlayAudio("bgm01");
 		}
 
 		public static void PauseGame(float gamePauseTime)
@@ -68,6 +70,8 @@ namespace GGJ2023.Beta
 		{
 			IsGameStarted = false;
 			IsGameRunning = false;
+
+			SoundManager.StopAudio("bgm01");
 		}
 
 		public const int BASE_SCORE_GAIN = 100;

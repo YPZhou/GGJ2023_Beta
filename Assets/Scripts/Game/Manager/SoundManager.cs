@@ -42,6 +42,14 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	public static void StopAudio(string clipName)
+	{
+		if (Audios.ContainsKey(clipName))
+		{
+			Audios[clipName].Stop();
+		}
+	}
+
 	public static void SetMasterVolume(float volumePercentage)
 	{
 		foreach (var audio in Audios)

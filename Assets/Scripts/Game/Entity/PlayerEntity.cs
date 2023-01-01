@@ -65,8 +65,9 @@ namespace GGJ2023.Beta
                 {
                     return;
                 }
-                
-                ChangeColor(colorType.Reverse());
+
+				SoundManager.PlayAudio("switch_color");
+				ChangeColor(colorType.Reverse());
 
             }
         }
@@ -90,7 +91,8 @@ namespace GGJ2023.Beta
         
         void OnTriggerProp(PropEntity propEntity)
         {
-
+            SoundManager.PlayAudio("pick_prop");
+            SoundManager.PlayAudio("switch_color");
             // 拾取到异色道具时变为对应的颜色
             ChangeColor(propEntity.colorType);
             
@@ -202,6 +204,7 @@ namespace GGJ2023.Beta
 
         void Hurt()
         {
+            SoundManager.PlayAudio("lose_health");
             Debug.Log("Hurt");
             // 颜色不同时扣血，重置得分倍率。
             GameStatus.Health -= GameStatus.HURT_HEALTH;
