@@ -91,30 +91,16 @@ namespace GGJ2023.Beta
         void OnTriggerProp(PropEntity propEntity)
         {
 
+            // 拾取到异色道具时变为对应的颜色
+            ChangeColor(propEntity.colorType);
+            
             if (TryGetComponent<HugeBuff>(out var hugeBuff))
             {
-                if (colorType == propEntity.colorType)
-                {
-                    hugeBuff.Delay(GameStatus.BASE_BUFF_DELAY);
-                }
-                else
-                {
-                    // 拾取到异色道具时变为对应的颜色
-                    ChangeColor(propEntity.colorType);
-                }
-
+                hugeBuff.Delay(GameStatus.BASE_BUFF_DELAY);
             }
             else if (TryGetComponent<SmallBuff>(out var smallBuff))
             {
-                if (colorType == propEntity.colorType)
-                {
-                    smallBuff.Delay(GameStatus.BASE_BUFF_DELAY);
-                }
-                else
-                {
-                    // 拾取到异色道具时变为对应的颜色
-                    ChangeColor(propEntity.colorType);
-                }
+                smallBuff.Delay(GameStatus.BASE_BUFF_DELAY);
             }
             else
             {
