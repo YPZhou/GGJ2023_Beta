@@ -76,6 +76,7 @@ namespace GGJ2023.Beta
 							currentGameMenu = 1;
 						}
 					}
+					SoundManager.PlayAudio("menu_change");
 				}
 
 				if (Input.GetKeyUp(KeyCode.DownArrow))
@@ -85,6 +86,7 @@ namespace GGJ2023.Beta
 					{
 						currentGameMenu = 2;
 					}
+					SoundManager.PlayAudio("menu_change");
 				}
 
 				if (Input.GetKeyUp(KeyCode.Return))
@@ -104,6 +106,7 @@ namespace GGJ2023.Beta
 							Application.Quit();
 							break;
 					}
+					SoundManager.PlayAudio("menu_click");
 				}
 			}
 		}
