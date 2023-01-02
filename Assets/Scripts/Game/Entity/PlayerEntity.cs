@@ -11,14 +11,13 @@ namespace GGJ2023.Beta
         public static PlayerEntity Instance { get; private set; }
 
         public CircleCollider2D Collider2D { get; private set; }
-        
-        public SpriteRenderer SpriteRenderer { get; private set; }
+
+        public SpriteRenderer SpriteRenderer;
         
         private void Awake()
         {
             Instance = this;
             Collider2D = GetComponent<CircleCollider2D>();
-            SpriteRenderer = GetComponent<SpriteRenderer>();
             ChangeColor(colorType);
         }
         
@@ -182,12 +181,17 @@ namespace GGJ2023.Beta
             if (colorType != color)
             {
                 colorType = color;
-                SpriteRenderer.color = color switch
+                switch (color)
                 {
-                    ColorType.Red => Color.red,
-                    ColorType.Blue => Color.blue,
-                    _ => SpriteRenderer.color
-                };
+                    case ColorType.Red:
+                        SpriteRenderer.color = ArtStatus.ColorA;
+                        break;
+                    case ColorType.Blue:
+                        SpriteRenderer.color = ArtStatus.ColorB;
+                        break;
+                    default:
+                        return;
+                }
             }
         }
 

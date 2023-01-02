@@ -5,6 +5,8 @@ namespace GGJ2023.Beta
 {
 	public class MainGameMenu : MonoBehaviour
 	{
+		EffectBlur effectBlur;
+
 		void Start()
 		{
 			GameStatus.IsGameStarted = false;
@@ -114,6 +116,8 @@ namespace GGJ2023.Beta
 
 		[SerializeField]
 		Text[] gameMenuTextList;
+
+		Camera mainCamera;
 
 		int currentGameMenu;
 	}

@@ -24,9 +24,9 @@ namespace GGJ2023.Beta
 		}
 
 		[SerializeField]
-		Text scoreText;
+		TextMesh scoreText;
 
 		[SerializeField]
-		Text scoreFactorText;
+		TextMesh scoreFactorText;
 	}
 }
