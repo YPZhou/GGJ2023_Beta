@@ -5,7 +5,7 @@ namespace GGJ2023.Beta
 {
 	public class MainGameMenu : MonoBehaviour
 	{
-		EffectBlur effectBlur;
+		public EffectBlur effectBlur;
 
 		void Start()
 		{
@@ -20,6 +20,7 @@ namespace GGJ2023.Beta
 			if (GameStatus.IsGameRunning)
 			{
 				mainGameMenu.gameObject.SetActive(false);
+				effectBlur.enabled = false;
 
 				if (Input.GetKeyUp(KeyCode.Escape))
 				{
@@ -30,6 +31,7 @@ namespace GGJ2023.Beta
 			else
 			{
 				mainGameMenu.gameObject.SetActive(true);
+				effectBlur.enabled = true;
 
 				for (var i = 0; i < gameMenuTextList.Length; i++)
 				{

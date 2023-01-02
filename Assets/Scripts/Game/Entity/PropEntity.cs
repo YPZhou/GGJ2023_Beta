@@ -11,7 +11,7 @@ namespace GGJ2023.Beta
 		{
 			if (colorType == ColorType.Red)
 			{
-				sprite.color = Color.red;
+				sprite.color = ArtStatus.ColorA;
 			}
 			else if (colorType == ColorType.Blue)
 			{
