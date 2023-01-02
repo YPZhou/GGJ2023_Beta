@@ -39,7 +39,8 @@ namespace GGJ2023.Beta
 
 					if (currentGameMenu == i)
 					{
-						gameMenuText.color = Color.red;
+						gameMenuText.color = Color.white;
+						gameMenuText.sprite = EnableItem[i];
 					}
 					else
 					{
@@ -54,10 +55,7 @@ namespace GGJ2023.Beta
 								gameMenuText.color = Color.gray;
 							}
 						}
-						else
-						{
-							gameMenuText.color = Color.white;
-						}
+						gameMenuText.sprite = unEnableItem[i];
 					}
 				}
 
@@ -117,7 +115,13 @@ namespace GGJ2023.Beta
 		Image mainGameMenu;
 
 		[SerializeField]
-		Text[] gameMenuTextList;
+		Image[] gameMenuTextList;
+
+		[SerializeField]
+		Sprite[] unEnableItem;
+
+		[SerializeField]
+		Sprite[] EnableItem;
 
 		Camera mainCamera;
 
