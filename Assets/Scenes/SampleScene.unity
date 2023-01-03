@@ -1920,8 +1920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurShader: {fileID: 4800000, guid: e0385ab622dfda84f877515b1af21689, type: 3}
-  GlitchPower: 30
-  JitterPower: 10
+  GlitchPower: 5
+  JitterPower: 5
   JitterImpact: 0
 --- !u!1 &603082466
 GameObject:
