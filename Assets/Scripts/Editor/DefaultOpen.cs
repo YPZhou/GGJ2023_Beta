@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEditor.Callbacks;
+using UnityEngine;
 
 public class DefaultOpen : MonoBehaviour
 {
-    [UnityEditor.Callbacks.OnOpenAsset(0)]
+    [OnOpenAsset(0)]
     public static bool OpenAsset(int instanceID, int line)
     {
         string filePath = AssetDatabase.GetAssetPath(instanceID);
