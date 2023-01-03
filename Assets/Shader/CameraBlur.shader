@@ -1,4 +1,4 @@
-Shader "Unlit/UIBlur"
+Shader "Camera/Blur"
 {
     Properties
     {

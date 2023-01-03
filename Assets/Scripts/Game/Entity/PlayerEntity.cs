@@ -13,6 +13,8 @@ namespace GGJ2023.Beta
         public CircleCollider2D Collider2D { get; private set; }
 
         public SpriteRenderer SpriteRenderer;
+
+        public EffectGlitch effectGlitch;
         
         private void Awake()
         {
@@ -219,6 +221,9 @@ namespace GGJ2023.Beta
             {
                 GameStatus.GameOver();
             }
+
+            // 根据血量触发屏幕震荡效果
+            effectGlitch.JitterImpact = 1;
         }
 
         public bool IsHuge => TryGetComponent<HugeBuff>(out _);
