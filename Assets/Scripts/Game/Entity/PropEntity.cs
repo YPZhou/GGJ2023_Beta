@@ -15,7 +15,7 @@ namespace GGJ2023.Beta
 			}
 			else if (colorType == ColorType.Blue)
 			{
-				sprite.color = Color.blue;
+				sprite.color = ArtStatus.ColorB;
 			}
 
 			generationTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);

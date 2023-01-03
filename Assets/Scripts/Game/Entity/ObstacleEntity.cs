@@ -13,20 +13,20 @@ namespace GGJ2023.Beta
 			{
 				if (colorType == ColorType.Red)
 				{
-					sprite.color = Color.red;
+					sprite.color = ArtStatus.ColorA;
 				}
 				else if (colorType == ColorType.Blue)
 				{
-					sprite.color = Color.blue;
+					sprite.color = ArtStatus.ColorB;
 				}
 			}
 			else if (obstacleType == ObstacleType.Block)
 			{
-				sprite.color = Color.yellow;
+				// sprite.color = Color.yellow;
 			}
 			else if (obstacleType == ObstacleType.Trap)
 			{
-				sprite.color = Color.gray;
+				// sprite.color = Color.gray;
 			}
 
 			generationTime = GameStatus.GetGameRunningTime(Time.realtimeSinceStartup);

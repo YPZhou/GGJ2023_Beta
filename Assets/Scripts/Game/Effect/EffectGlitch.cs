@@ -37,15 +37,16 @@ namespace GGJ2023.Beta
         {
             // Glich
             float glitchPower = (GameStatus.MAX_HEALTH - GameStatus.Health);
+            glitchPower *= glitchPower;
             Vector2 glitchDir = new Vector2(
                 Mathf.PerlinNoise(Time.realtimeSinceStartup * glitchPower, 0) * 2 - 1,
                 Mathf.PerlinNoise(Time.realtimeSinceStartup * glitchPower, 1) * 2 - 1);
             glitchVec = glitchDir * glitchPower * GlitchPower;
 
             // Jitter Impact
-            Vector2 jitterDir = new Vector2(
+            Vector2 impactDir = new Vector2(
                 Mathf.PerlinNoise(Time.realtimeSinceStartup, 2) * 2 - 1, 1).normalized;
-            jitterVec = JitterPower * JitterImpact * GlitchPower * jitterDir;
+            jitterVec = JitterPower * JitterImpact * GlitchPower * impactDir;
             JitterImpact *= 0.5f;
 
         }
